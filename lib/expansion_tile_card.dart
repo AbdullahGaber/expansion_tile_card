@@ -57,6 +57,7 @@ class ExpansionTileCard extends StatefulWidget {
     this.isThreeLine = false,
     this.shadowColor = const Color(0xffaaaaaa),
     this.animateTrailing = false,
+    this.collapsedColor,
   })  : assert(initiallyExpanded != null),
         super(key: key);
 
@@ -76,6 +77,9 @@ class ExpansionTileCard extends StatefulWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? subtitle;
+
+  /// The color of collapse Tile
+  final Color? collapsedColor;
 
   /// Called when the tile expands or collapses.
   ///
@@ -296,6 +300,7 @@ class ExpansionTileCardState extends State<ExpansionTileCard>
                     RoundedRectangleBorder(borderRadius: widget.borderRadius),
                 onTap: toggleExpansion,
                 child: ListTileTheme.merge(
+                  tileColor: widget.collapsedColor,
                   iconColor: _iconColor.value,
                   textColor: _headerColor.value,
                   child: Padding(
