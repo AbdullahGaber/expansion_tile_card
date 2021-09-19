@@ -58,6 +58,7 @@ class ExpansionTileCard extends StatefulWidget {
     this.shadowColor = const Color(0xffaaaaaa),
     this.animateTrailing = false,
     this.tileColor,
+    this.expandedCrossAxisAlignment = CrossAxisAlignment.start,
   })  : assert(initiallyExpanded != null),
         super(key: key);
 
@@ -183,6 +184,9 @@ class ExpansionTileCard extends StatefulWidget {
   ///
   /// Defaults to Curves.easeIn.
   final Curve paddingCurve;
+
+  ///Cross Alignment for Expanded Children 
+  final CrossAxisAlignment? expandedCrossAxisAlignment;
 
   @override
   ExpansionTileCardState createState() => ExpansionTileCardState();
@@ -355,7 +359,9 @@ class ExpansionTileCardState extends State<ExpansionTileCard>
     return AnimatedBuilder(
       animation: _controller.view,
       builder: _buildChildren,
-      child: closed ? null : Column(children: widget.children),
+      child: closed ? null : Column(
+        crossAxisAlignment: widget.expandedCrossAxisAlignment!,
+        children: widget.children),
     );
   }
 }
